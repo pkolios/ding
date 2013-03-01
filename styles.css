@@ -1,0 +1,14 @@
+body {
+ background-color: black;
+}
+.subunit {
+ fill: dimgrey;
+}
+
+.place-label {
+  fill: #black;
+  fill-opacity: 1;
+  font-size: 10px;
+  font-weight: 300;
+  text-anchor: left;
+}
