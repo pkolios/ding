@@ -47,14 +47,14 @@ var ding = function(lat, lon) {
     // add the persistent dot
     svg.append('svg:circle')
     .attr("transform", "translate(" + projection(point) + ")")
-    .attr("r", 1)
+    .attr("r", 2)
     .attr("fill", "cyan");
     // create the ping element
     var ping = svg.append('svg:circle')
     .attr("transform", "translate(" + projection(point) + ")")
     .attr("r", 0)
     .attr("fill-opacity", 0)
-    .attr("stroke-width", 2)
+    .attr("stroke-width", 4)
     .attr("stroke-opacity", 0.9)
     .attr("stroke", "cyan");
     // do the ping animation and remove the ping element after
@@ -66,3 +66,25 @@ var ding = function(lat, lon) {
 
     return point;
 };
+
+$(function() {
+    // Open up a connection to our server
+    var ws = new WebSocket("ws://localhost:10000/");
+
+    // What do we do when we get a message?
+    ws.onmessage = function(evt) {
+        //$("#placeholder").append('<p>' + evt.data + '</p>')
+        ping = JSON.parse(evt.data);
+        ding(ping.lat, ping.lon);
+    }
+    // Just update our conn_status field with the connection status
+    ws.onopen = function(evt) {
+        $('#conn_status').html('<b>Connected</b>');
+    }
+    ws.onerror = function(evt) {
+        $('#conn_status').html('<b>Error</b>');
+    }
+    ws.onclose = function(evt) {
+        $('#conn_status').html('<b>Closed</b>');
+    }
+});

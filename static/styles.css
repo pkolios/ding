@@ -1,6 +1,11 @@
 body {
  background-color: black;
 }
+
+p {
+ color: white;
+}
+
 .subunit {
  fill: dimgrey;
 }
