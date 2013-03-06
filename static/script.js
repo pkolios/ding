@@ -73,7 +73,6 @@ $(function() {
 
     // What do we do when we get a message?
     ws.onmessage = function(evt) {
-        //$("#placeholder").append('<p>' + evt.data + '</p>')
         ping = JSON.parse(evt.data);
         ding(ping.lat, ping.lon);
     }

@@ -1,24 +1,32 @@
-# Simple gevent-websocket server
-import cPickle
 import json
-import random
 
-from gevent import pywsgi, sleep
+from gevent import pywsgi
 from geventwebsocket.handler import WebSocketHandler
+import pika
 
 
 class WebSocketApp(object):
     '''Send random data to the websocket'''
+    def __init__(self):
+        # Rabbitmq
+        self.connection = pika.BlockingConnection(pika.ConnectionParameters(
+                                                  host='localhost'))
+        self.channel = self.connection.channel()
+        self.channel.queue_declare(queue='hello')
+
+        self.channel.basic_consume(self.callback,
+                                   queue='hello',
+                                   no_ack=True)
+
+    def callback(self, ch, method, properties, body):
+        body = json.loads(body)
+        data = json.dumps({'lat': body['lat'], 'lon': body['lon']})
+        self.ws.send(data)
 
     def __call__(self, environ, start_response):
-        ws = environ['wsgi.websocket']
-        # coords.dat contains lat/lon tuples of German cities
-        coords = cPickle.load(open('coords.dat', 'rb'))
-        while True:
-            city = random.choice(coords)
-            data = json.dumps({'lat': city[0], 'lon': city[1]})
-            ws.send(data)
-            sleep(0.5)
+        self.ws = environ['wsgi.websocket']
+        self.channel.start_consuming()
+
 
 server = pywsgi.WSGIServer(("", 10000), WebSocketApp(),
                            handler_class=WebSocketHandler)
