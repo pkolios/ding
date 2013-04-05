@@ -10,7 +10,7 @@ app = Flask(__name__)
 connection = pika.BlockingConnection(pika.ConnectionParameters(
                                      host='localhost'))
 channel = connection.channel()
-channel.queue_declare(queue='hello')
+channel.queue_declare(queue='ding')
 
 
 @app.route('/ding', methods=['GET'])

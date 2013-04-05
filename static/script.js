@@ -61,7 +61,7 @@ var ding = function(lat, lon) {
     ping.transition()
     .duration(1000)
     .attr("stroke-opacity", 0)
-    .attr("r", 40)
+    .attr("r", 70)
     .call( function(d) { d.remove() });
 
     return point;

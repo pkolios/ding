@@ -12,10 +12,10 @@ class WebSocketApp(object):
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(
                                                   host='localhost'))
         self.channel = self.connection.channel()
-        self.channel.queue_declare(queue='hello')
+        self.channel.queue_declare(queue='ding')
 
         self.channel.basic_consume(self.callback,
-                                   queue='hello',
+                                   queue='ding',
                                    no_ack=True)
 
     def callback(self, ch, method, properties, body):
