@@ -2,7 +2,7 @@ import json
 
 import pika
 
-from flask import Flask, Response, request, abort
+from flask import Flask, Response, request, abort, render_template
 
 app = Flask(__name__)
 
@@ -11,6 +11,11 @@ connection = pika.BlockingConnection(pika.ConnectionParameters(
                                      host='localhost'))
 channel = connection.channel()
 channel.queue_declare(queue='ding')
+
+
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
 
 
 @app.route('/ding', methods=['GET'])
