@@ -27,7 +27,7 @@ def ding():
         ding = json.dumps({'lat': request.args['lat'],
                            'lon': request.args['lon']})
         channel.basic_publish(exchange='',
-                              routing_key='hello',
+                              routing_key='ding',
                               body=ding)
         resp = Response(json.dumps({'status': 'Accepted'}), status=200,
                         mimetype='application/json')

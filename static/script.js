@@ -1,19 +1,16 @@
-var width = 960,
-    height = 1160;
-
+var width = 560,
+    height = 520;
 
 var projection = d3.geo.albers()
-    .center([9, 50])
+    .center([9, 51])
     .rotate([0, 0])
-    .scale(1200 * 5)
+    .scale(1200 * 3)
     .translate([width / 2, height / 2]);
-
 
 var path = d3.geo.path()
     .projection(projection);
 
-
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#map").append("svg")
     .attr("width", width)
     .attr("height", height);
 

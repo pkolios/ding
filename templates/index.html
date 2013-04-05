@@ -10,8 +10,11 @@
 </head>
 <body>
 <p>Connection status: <span id="conn_status">Unknown</span></p>
-<p id="placeholder"></p>
-<div id="chart"></div>
+<div class="panel panel-map">
+    <header>Header</header>
+    <section id="map"></section>
+    <footer>Footer</footer>
+</div>
 <script type="text/javascript">
 var settings = {
     {% for key, value in settings.iteritems() %}'{{ key }}': '{{ value }}'{% endfor %},
