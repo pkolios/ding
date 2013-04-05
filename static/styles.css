@@ -9,8 +9,13 @@ p {
 }
 
 .panel {
+ position: relative;
  background-color: #2a2a2a; /* Panel Grey */
  overflow: hidden;
+ -webkit-box-shadow: #101214 0 0 8px;
+ -moz-box-shadow: #101214 0 0 8px;
+ box-shadow: #101214 0 0 8px;
+ z-index: 1;
 }
 
 .panel>header {
@@ -34,6 +39,25 @@ p {
 
 .panel-map {
  width: 700px;
+}
+
+.circle {
+ position: absolute;
+ top: 16px;
+ left: 12px;
+ float: left;
+ background: #f39c12;
+ width: 9px;
+ height: 9px;
+ border-radius: 50%;
+}
+
+.error {
+ background: #c84d40;
+}
+
+.connected {
+ background: #78ab49;
 }
 
 .subunit {

@@ -75,12 +75,18 @@ $(function() {
     }
     // Just update our conn_status field with the connection status
     ws.onopen = function(evt) {
-        $('#conn_status').html('<b>Connected</b>');
+        $('.circle').removeClass("connected");
+        $('.circle').removeClass("error");
+        $('.circle').addClass("connected");
     }
     ws.onerror = function(evt) {
-        $('#conn_status').html('<b>Error</b>');
+        $('.circle').removeClass("connected");
+        $('.circle').removeClass("error");
+        $('.circle').addClass("error");
     }
     ws.onclose = function(evt) {
-        $('#conn_status').html('<b>Closed</b>');
+        $('.circle').removeClass("connected");
+        $('.circle').removeClass("error");
+        $('.circle').addClass("error");
     }
 });
