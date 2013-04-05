@@ -17,7 +17,7 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-d3.json("de.json", function(error, de) {
+d3.json(settings.map, function(error, de) {
 
     svg.append("path")
 	.datum(topojson.object(de, de.objects.subunits))

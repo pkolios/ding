@@ -2,7 +2,7 @@ import json
 
 import pika
 
-from flask import Flask, Response, request, abort, render_template
+from flask import Flask, Response, abort, render_template, request, url_for
 
 app = Flask(__name__)
 
@@ -15,7 +15,10 @@ channel.queue_declare(queue='ding')
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html')
+    settings = {
+        'map': url_for('static', filename='maps/de.json')
+    }
+    return render_template('index.html', settings=settings)
 
 
 @app.route('/ding', methods=['GET'])

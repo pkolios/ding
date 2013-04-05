@@ -12,6 +12,11 @@
 <p>Connection status: <span id="conn_status">Unknown</span></p>
 <p id="placeholder"></p>
 <div id="chart"></div>
+<script type="text/javascript">
+var settings = {
+    {% for key, value in settings.iteritems() %}'{{ key }}': '{{ value }}'{% endfor %},
+};
+</script> 
 <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
