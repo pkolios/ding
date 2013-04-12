@@ -9,9 +9,24 @@
 <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
 </head>
 <body>
-<div class="panel panel-map">
+<div class="panel panel-wide">
     <header><div class="circle"></div>Header</header>
     <section id="map"></section>
+    <footer>Footer</footer>
+</div>
+<div class="panel panel-money">
+    <header>Transactions count</header>
+    <section class="panel-section"><h1 id="counter">0</h1></section>
+    <footer>Footer</footer>
+</div>
+<div class="panel panel-money">
+    <header>Transactions value</header>
+    <section class="panel-section"><h1 id="total">0</h1></section>
+    <footer>Footer</footer>
+</div>
+<div class="panel panel-wide">
+    <header>Header</header>
+    <section class="panel-section panel-message"></section>
     <footer>Footer</footer>
 </div>
 <script type="text/javascript">

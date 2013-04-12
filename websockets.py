@@ -20,7 +20,9 @@ class WebSocketApp(object):
 
     def callback(self, ch, method, properties, body):
         body = json.loads(body)
-        data = json.dumps({'lat': body['lat'], 'lon': body['lon']})
+        data = json.dumps({'lat': body['lat'],
+                           'lon': body['lon'],
+                           'amount': body['amount']})
         self.ws.send(data)
 
     def __call__(self, environ, start_response):

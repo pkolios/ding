@@ -1,10 +1,10 @@
 var width = 560,
-    height = 520;
+    height = 600;
 
 var projection = d3.geo.albers()
     .center([9, 51])
     .rotate([0, 0])
-    .scale(1200 * 3)
+    .scale(1400 * 3)
     .translate([width / 2, height / 2]);
 
 var path = d3.geo.path()
@@ -38,13 +38,27 @@ d3.json(settings.map, function(error, de) {
 
 });
 
+var increment_counter = function() {
+    var c = $('#counter').html();
+    c = parseInt(c) + 1;
+    $('#counter').html(c);
+    return c;
+};
+
+var increment_total= function(amount) {
+    var t = $('#total').html();
+    t = parseFloat(t) + parseFloat(amount);
+    $('#total').html(t.toFixed(2));
+    return t;
+};
+
 var ding = function(lat, lon) {
     // projection expects pair of [lon,lat]
     var point = [lon, lat];
     // add the persistent dot
     svg.append('svg:circle')
     .attr("transform", "translate(" + projection(point) + ")")
-    .attr("r", 2)
+    .attr("r", 1)
     .attr("fill", "cyan");
     // create the ping element
     var ping = svg.append('svg:circle')
@@ -71,6 +85,8 @@ $(function() {
     // What do we do when we get a message?
     ws.onmessage = function(evt) {
         ping = JSON.parse(evt.data);
+        increment_counter();
+        increment_total(ping.amount);
         ding(ping.lat, ping.lon);
     }
     // Just update our conn_status field with the connection status
