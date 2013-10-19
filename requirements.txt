@@ -1,0 +1,4 @@
+Flask==0.10.1
+gevent==0.13.8
+gevent-websocket==0.3.6
+pika==0.9.13
