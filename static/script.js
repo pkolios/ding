@@ -45,6 +45,14 @@ var increment_counter = function() {
     return c;
 };
 
+var calculate_average = function() {
+    var t = $('#total').html();
+    var c = $('#counter').html();
+    var a = parseFloat(t)/ parseInt(c);
+    $('#average').html(a.toFixed(2));
+    return a;
+};
+
 var increment_total= function(amount) {
     var t = $('#total').html();
     t = parseFloat(t) + parseFloat(amount);
@@ -87,6 +95,7 @@ $(function() {
         ping = JSON.parse(evt.data);
         increment_counter();
         increment_total(ping.amount);
+        calculate_average();
         ding(ping.lat, ping.lon, ping.color);
     }
     // Just update our conn_status field with the connection status
