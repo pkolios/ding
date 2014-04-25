@@ -26,7 +26,8 @@ def ding():
     if all(k in request.args for k in ('lat', 'lon')):
         ding = json.dumps({'lat': request.args['lat'],
                            'lon': request.args['lon'],
-                           'amount': request.args['amount']})
+                           'amount': request.args['amount'],
+                           'color': request.args.get('color', 'cyan')})
         channel.basic_publish(exchange='',
                               routing_key='ding',
                               body=ding)

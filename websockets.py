@@ -22,7 +22,8 @@ class WebSocketApp(object):
         body = json.loads(body)
         data = json.dumps({'lat': body['lat'],
                            'lon': body['lon'],
-                           'amount': body['amount']})
+                           'amount': body['amount'],
+                           'color': body['color']})
         self.ws.send(data)
 
     def __call__(self, environ, start_response):

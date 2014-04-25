@@ -52,14 +52,14 @@ var increment_total= function(amount) {
     return t;
 };
 
-var ding = function(lat, lon) {
+var ding = function(lat, lon, color) {
     // projection expects pair of [lon,lat]
     var point = [lon, lat];
     // add the persistent dot
     svg.append('svg:circle')
     .attr("transform", "translate(" + projection(point) + ")")
     .attr("r", 1)
-    .attr("fill", "cyan");
+    .attr("fill", color);
     // create the ping element
     var ping = svg.append('svg:circle')
     .attr("transform", "translate(" + projection(point) + ")")
@@ -67,7 +67,7 @@ var ding = function(lat, lon) {
     .attr("fill-opacity", 0)
     .attr("stroke-width", 4)
     .attr("stroke-opacity", 0.9)
-    .attr("stroke", "cyan");
+    .attr("stroke", color);
     // do the ping animation and remove the ping element after
     ping.transition()
     .duration(1000)
@@ -87,7 +87,7 @@ $(function() {
         ping = JSON.parse(evt.data);
         increment_counter();
         increment_total(ping.amount);
-        ding(ping.lat, ping.lon);
+        ding(ping.lat, ping.lon, ping.color);
     }
     // Just update our conn_status field with the connection status
     ws.onopen = function(evt) {
